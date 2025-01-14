@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIRCLE OF LIFELINE</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/font.css" />
+  </head>
+  <body>
+    <div id="clock-container">
+      <div id="labels">
+        <p class="clock-label" style="--count: 1"><span>1</span></p>
+        <p class="clock-label" style="--count: 2"><span>2</span></p>
+        <p class="clock-label" style="--count: 3"><span>3</span></p>
+        <p class="clock-label" style="--count: 4"><span>4</span></p>
+        <p class="clock-label" style="--count: 5"><span>5</span></p>
+        <p class="clock-label" style="--count: 6"><span>6</span></p>
+        <p class="clock-label" style="--count: 7"><span>7</span></p>
+        <p class="clock-label" style="--count: 8"><span>8</span></p>
+        <p class="clock-label" style="--count: 9"><span>9</span></p>
+        <p class="clock-label" style="--count: 10"><span>10</span></p>
+        <p class="clock-label" style="--count: 11"><span>11</span></p>
+        <p class="clock-label" style="--count: 12"><span>12</span></p>
+      </div>
+      <div id="time">
+        <div
+          class="circular-track"
+          style="--bgColor: #04fc43; --needle-width: 1"
+        >
+          <div class="dots hrs_dot"></div>
+          <svg style="--stroke-width: 2">
+            <circle cx="120" cy="120" r="120" id="hrs" />
+          </svg>
+        </div>
+        <div
+          class="circular-track"
+          style="--bgColor: #fee800; --needle-width: 1"
+        >
+          <div class="dots min_dot"></div>
+          <svg style="--stroke-width: 2">
+            <circle cx="100" cy="100" r="100" id="min" />
+          </svg>
+        </div>
+        <div
+          class="circular-track"
+          style="--bgColor: #ff2972; --needle-width: 1"
+        >
+          <div class="dots sec_dot"></div>
+          <svg style="--stroke-width: 2">
+            <circle cx="80" cy="80" r="80" id="sec" />
+          </svg>
+        </div>
+        <div class="circular-track" style="--bgColor: #fff; --needle-width: 0">
+          <div class="dots millisec_dot"></div>
+          <svg style="--stroke-width: 0">
+            <circle cx="60" cy="60" r="60" id="millisec" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let milliSec = document.getElementById("millisec");
+      let sec = document.getElementById("sec");
+      let min = document.getElementById("min");
+      let hrs = document.getElementById("hrs");
+
+      setInterval(() => {
+        let ms = new Date().getMilliseconds();
+        let ss = new Date().getSeconds();
+        let mm = new Date().getMinutes();
+        let hh = new Date().getHours();
+
+        milliSec.style.strokeDashoffset =
+          376.9911184308 - (376.9911184308 * ms) / 1000;
+        sec.style.strokeDashoffset =
+          502.6548245744 - (502.6548245744 * ss) / 60;
+        min.style.strokeDashoffset = 628.318530718 - (628.318530718 * mm) / 60;
+        hrs.style.strokeDashoffset =
+          753.9822368616 - (753.9822368616 * hh) / 24;
+
+        document.querySelector(".millisec_dot").style.transform = `rotateZ(${
+          ms * 0.36
+        }deg)`;
+        document.querySelector(".sec_dot").style.transform = `rotateZ(${
+          ss * 6
+        }deg)`;
+        document.querySelector(".min_dot").style.transform = `rotateZ(${
+          mm * 6
+        }deg)`;
+        document.querySelector(".hrs_dot").style.transform = `rotateZ(${
+          hh * 1
+        }deg)`;
+      });
+    </script>
+  </body>
+</html>

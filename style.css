@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: Montserrat-Light;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: whitesmoke;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background-color: #2f363e;
+}
+
+#clock-container {
+  position: relative;
+
+  width: 280px;
+  height: 280px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  scale: 2;
+  box-shadow: inset 5px 5px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+}
+
+div#labels {
+  position: absolute;
+  height: 35%;
+  aspect-ratio: 1;
+}
+
+div#labels .clock-label {
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%) rotate(calc(30deg * var(--count)));
+  height: 100%;
+}
+
+.clock-label span {
+  position: relative;
+  transform: rotate(30deg);
+}
+
+#time {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+#time .circular-track {
+  position: absolute;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+#time .circular-track svg {
+  position: relative;
+  transform: rotate(270deg);
+}
+
+#time .circular-track:nth-child(1) svg {
+  width: 250px;
+  height: 250px;
+}
+#time .circular-track:nth-child(2) svg {
+  width: 210px;
+  height: 210px;
+}
+#time .circular-track:nth-child(3) svg {
+  width: 170px;
+  height: 170px;
+}
+
+#time .circular-track:nth-child(4) svg {
+  width: 130px;
+  height: 130px;
+}
+
+#time .circular-track svg circle {
+  width: 100%;
+  height: 100%;
+  fill: transparent;
+  stroke-width: var(--stroke-width);
+  stroke: var(--bgColor);
+  transform: translate(5px, 5px);
+  opacity: 0.25;
+}
+
+#time .circular-track svg circle {
+  stroke-linecap: round;
+}
+
+#time .circular-track:nth-child(1) svg circle {
+  stroke-dasharray: 753.9822368616;
+  stroke-dashoffset: 753.9822368616;
+}
+
+#time .circular-track:nth-child(2) svg circle {
+  stroke-dasharray: 628.318530718;
+  stroke-dashoffset: 628.318530718;
+}
+
+#time .circular-track:nth-child(3) svg circle {
+  stroke-dasharray: 502.6548245744;
+  stroke-dashoffset: 502.6548245744;
+}
+
+#time .circular-track:nth-child(4) svg circle {
+  stroke-dasharray: 376.9911184308;
+  stroke-dashoffset: 376.9911184308;
+}
+
+.dots {
+  position: absolute;
+  height: 100%;
+  width: 10px;
+  transition: 750ms;
+}
+
+.dots::before {
+  content: "";
+  position: absolute;
+
+  height: 10px;
+  aspect-ratio: 1;
+  top: 5px;
+  left: 50%;
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+  background-color: var(--bgColor);
+
+  box-shadow: 0 0 20px var(--bgColor), 0 0 40px var(--bgColor),
+    0 0 60px var(--bgColor), 0 0 80px var(--bgColor);
+}
+
+.dots::after {
+  content: "";
+  position: absolute;
+  bottom: 32%;
+  left: 50%;
+  height: 20%;
+  transform: translateX(-50%);
+  width: calc(var(--needle-width) * 2px);
+  background-color: var(--bgColor);
+  opacity: 0.5;
+}
+
+svg circle {
+  transition: 16ms;
+}
