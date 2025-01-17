@@ -4,7 +4,7 @@
   box-sizing: border-box;
 
   font-family: Montserrat-Light;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: whitesmoke;
 }
@@ -34,24 +34,54 @@ body {
   border-radius: 50%;
 }
 
-div#labels {
+#clock-marks {
   position: absolute;
-  height: 35%;
+
+  width: 110px;
+  height: 110px;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+#mark-12 {
+  stroke-dasharray: 0.5 25.62;
+  stroke-width: 10;
+  stroke: white;
+  fill: none;
+}
+
+#mark-60 {
+  stroke-dasharray: 0.5 4.724;
+  stroke-width: 3;
+  stroke: white;
+  fill: none;
+  opacity: 0.5;
+}
+
+#labels {
+  position: absolute;
+  height: 135px;
+  width: 20px;
   aspect-ratio: 1;
 }
 
-div#labels .clock-label {
+#labels .clock-label {
   position: absolute;
 
   left: 50%;
-
+  text-align: center;
   transform: translateX(-50%) rotate(calc(30deg * var(--count)));
   height: 100%;
+  width: 20px;
 }
 
 .clock-label span {
-  position: relative;
-  transform: rotate(30deg);
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%) rotate(calc(-30deg * var(--count)));
 }
 
 #time {
@@ -78,21 +108,21 @@ div#labels .clock-label {
 }
 
 #time .circular-track:nth-child(1) svg {
-  width: 250px;
-  height: 250px;
+  width: 180px;
+  height: 180px;
 }
 #time .circular-track:nth-child(2) svg {
-  width: 210px;
-  height: 210px;
+  width: 160px;
+  height: 160px;
 }
 #time .circular-track:nth-child(3) svg {
-  width: 170px;
-  height: 170px;
+  width: 110px;
+  height: 110px;
 }
 
 #time .circular-track:nth-child(4) svg {
-  width: 130px;
-  height: 130px;
+  width: 80px;
+  height: 80px;
 }
 
 #time .circular-track svg circle {
@@ -105,28 +135,32 @@ div#labels .clock-label {
   opacity: 0.25;
 }
 
-#time .circular-track svg circle {
-  stroke-linecap: round;
+#time .circular-track:nth-child(3) svg circle {
+  opacity: 0.75;
 }
 
+/* #time .circular-track svg circle {
+  stroke-linecap: round;
+} */
+
 #time .circular-track:nth-child(1) svg circle {
-  stroke-dasharray: 753.9822368616;
-  stroke-dashoffset: 753.9822368616;
+  stroke-dasharray: 534.07075111026;
+  stroke-dashoffset: 534.07075111026;
 }
 
 #time .circular-track:nth-child(2) svg circle {
-  stroke-dasharray: 628.318530718;
-  stroke-dashoffset: 628.318530718;
+  stroke-dasharray: 471.2388980385;
+  stroke-dashoffset: 471.2388980385;
 }
 
 #time .circular-track:nth-child(3) svg circle {
-  stroke-dasharray: 502.6548245744;
-  stroke-dashoffset: 502.6548245744;
+  stroke-dasharray: 314.159265359;
+  stroke-dashoffset: 314.159265359;
 }
 
 #time .circular-track:nth-child(4) svg circle {
-  stroke-dasharray: 376.9911184308;
-  stroke-dashoffset: 376.9911184308;
+  stroke-dasharray: 219.9114857513;
+  stroke-dashoffset: 219.9114857513;
 }
 
 .dots {
@@ -140,7 +174,7 @@ div#labels .clock-label {
   content: "";
   position: absolute;
 
-  height: 10px;
+  height: var(--dot-size);
   aspect-ratio: 1;
   top: 5px;
   left: 50%;
@@ -156,15 +190,47 @@ div#labels .clock-label {
 .dots::after {
   content: "";
   position: absolute;
-  bottom: 32%;
+  bottom: calc(50% - 4px);
   left: 50%;
-  height: 20%;
+  height: var(--needle-length);
   transform: translateX(-50%);
-  width: calc(var(--needle-width) * 2px);
+  width: calc(var(--needle-width) * 1px);
   background-color: var(--bgColor);
   opacity: 0.5;
 }
 
+#clock-container::before {
+  content: "";
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 1;
+  background-color: white;
+}
+
 svg circle {
-  transition: 16ms;
+  transition: 300ms;
+}
+
+.vLine,
+.hLine {
+  position: absolute;
+
+  opacity: 0.1;
+  background-color: aliceblue;
+}
+
+.vLine {
+  width: 1px;
+  height: 100%;
+}
+
+.hLine {
+  width: 100%;
+  height: 1px;
 }
